@@ -79,16 +79,16 @@
        <#if estaLogueado==false>
            <h1 class="my-4">&nbsp <small> </small></h1> <!-- ESPACIO VACIO -->
            <div class="card my-4">
-               <h5 class="card-header">Log in!</h5>
+               <h5 class="card-header">Iniciar sesion</h5>
                <div class="card-block">
-                   <form action="/home" method="post" >
-                       <div class="input-group">
+                   <form action="/home" method="post" class="form-bottom">
+                       <div class="form-group">
                            <input class="form-username form-control" type="text" name="User" value="" id="Username"
-                                  placeholder="Username"><br>
+                                  placeholder="Username">
                        </div>
-                       <div class="input-group">
+                       <div class="form-group">
                            <input class="form-username form-control" type="password" name="Pass" value="" id="Password"
-                                  placeholder="Password"><br>
+                                  placeholder="Password">
                        </div>
                        <div class="input-group">
                            <button class="btn btn-primary" type="submit">Ingresar</button>

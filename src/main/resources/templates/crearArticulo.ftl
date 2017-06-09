@@ -62,13 +62,13 @@
                             <div class="form-group">
                                 <label for="Titulo">Titulo&nbsp&nbsp&nbsp</label>
                                 <input class="form-username form-control" style="width:500px" type="text" name="Titu"
-                                       id="Titulo" placeholder="Titulo del blog"><br>
+                                       id="Titulo" placeholder="Titulo del blog" required><br>
                             </div>
 
                             <div class="form-group">
                                 <label for="Cuerpo">Cuerpo: </label>
                                 <input class="form-username form-control" style="width:500px;height:250px" type="text"
-                                       name="Cuer" id="Cuerpo" placeholder="Cuerpo del blog"><br>
+                                       name="Cuer" id="Cuerpo" placeholder="Cuerpo del blog" required><br>
                             </div>
 
                             <div class="form-group">
@@ -76,8 +76,9 @@
                                 <input class="form-username form-control" style="..." type="text" name="Eti"
                                        id="Etiqueta" placeholder="Etiquetas. Si es mas de una, separarlas por comas.">
                             </div>
-
                             <button class="btn btn-success" type="submit" >Guardar</button>
+                            <button class="btn btn-danger" type="button" onclick="location.href = '/home';">Cancelar
+                            </button>
                         </form>
                     </p>
 
@@ -106,5 +107,20 @@
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
-
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var elements = document.getElementsByTagName("INPUT");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].oninvalid = function (e) {
+                e.target.setCustomValidity("");
+                if (!e.target.validity.valid) {
+                    e.target.setCustomValidity("Campo no puede estar vacio.");
+                }
+            };
+            elements[i].oninput = function (e) {
+                e.target.setCustomValidity("");
+            };
+        }
+    })
+</script>
 </html>
