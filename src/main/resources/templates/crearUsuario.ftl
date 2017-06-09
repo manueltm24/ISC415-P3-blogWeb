@@ -59,18 +59,18 @@
                     <h2 class="card-title">Nuevo Usuario</h2>
                     <form action="/crearUsuario/" method="post" >
                         <p class="card-text">
-                            <label for="Nombre">Nombre</label>
-                            <input type="text" name="Nom" id="Nombre"><br>
-                            <label for="Username">Username</label>
-                            <input type="text" name="User" id="Username"><br>
-                            <label for="Password">Password</label>
-                            <input type="text" name="Pass" id="Password"><br>
-                            <label for="Administrador">Administrador</label>
+                            <label for="Nombre">Nombre: </label>
+                            <input class="form-username form-control" type="text" name="Nom" id="Nombre"><br>
+                            <label for="Username">Username: </label>
+                            <input class="form-username form-control" type="text" name="User" id="Username"><br>
+                            <label for="Password">Password: </label>
+                            <input class="form-username form-control" type="password" name="Pass" id="Password"><br>
+                            <label for="Administrador">Administrador: </label>
                             <input type="checkbox" name="Adm" value="true">
-                            <label for="Autor">Autor</label>
+                            <label for="Autor">Autor: </label>
                             <input type="checkbox" name="Aut" value="true">
                         </p>
-                            <button class="btn btn-secondary" type="submit">Guardar Usuario</button>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
                     </form>
                 </div>
             </div>

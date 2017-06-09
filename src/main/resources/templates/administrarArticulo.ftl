@@ -98,10 +98,11 @@
                 <form method="post" action="/crearComentario/${articuloSeleccionado.getId()}">
                 <h2 class="card-title">Nuevo comentario:</h2>
                 <p class="card-text">
-                    <input style="width:500px;height:250px" type="text" name="Coment" value="" id="Comentario" placeholder="Inserte aqui su comentario.!">
+                    <input class="form-username form-control" style="width:500px;height:250px" type="text" name="Coment"
+                           value="" id="Comentario" placeholder="Inserte aqui su comentario.!">
 
                 </p>
-                <button class="btn btn-success" type="submit" >Summit</button>
+                    <button class="btn btn-success" type="submit">Sumbit</button>
                 </form>
             </div>
         </div>

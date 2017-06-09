@@ -24,64 +24,6 @@ public class Articulo {
     private String fecha;
     private String resumen;
 
-    public String getFecha() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        String dateInString = new Date().toString();
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getCuerpo() {
-        return cuerpo;
-    }
-
-    public void setCuerpo(String cuerpo) {
-        this.cuerpo = cuerpo;
-    }
-
-    public int getAutor() {
-        return autor;
-    }
-
-    public void setAutor(int autor) {
-        this.autor = autor;
-    }
-
-    public String getResumen() {
-        if (cuerpo.length() > 70){
-            return cuerpo.substring(0, 70);
-        }
-        else{
-            return cuerpo;
-        }
-
-    }
-
-    public void setResumen(String resumen) {
-        this.resumen = resumen;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //QUERYS
     public static List<Articulo> listadoArticulos(){
         ArrayList<Articulo> articulos = new ArrayList<Articulo>();
@@ -120,6 +62,7 @@ public class Articulo {
         return articulos;
 
     }
+
     public static Articulo listadoArticulosEspecifico(int ArticuloId){
         ArrayList<Articulo> articulos = new ArrayList<Articulo>();
 
@@ -231,7 +174,7 @@ public class Articulo {
 
     }
 
-    public static void modificarArticlo(int idArticulo, String titulo, String cuerpo){
+    public static void modificarArticulo(int idArticulo, String titulo, String cuerpo) {
         Connection con = null;
         try {
             con = ConexionDB.getInstancia().getConexion();
@@ -274,6 +217,63 @@ public class Articulo {
             }
         }
         return ultimoIndice;
+    }
+
+    public String getFecha() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+        String dateInString = new Date().toString();
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getCuerpo() {
+        return cuerpo;
+    }
+
+    public void setCuerpo(String cuerpo) {
+        this.cuerpo = cuerpo;
+    }
+
+    public int getAutor() {
+        return autor;
+    }
+
+    public void setAutor(int autor) {
+        this.autor = autor;
+    }
+
+    public String getResumen() {
+        if (cuerpo.length() > 70) {
+            return cuerpo.substring(0, 70);
+        } else {
+            return cuerpo;
+        }
+
+    }
+
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
     }
 
 }

@@ -57,7 +57,7 @@
                 <div class="card-block">
                     <h2 class="card-title">${articulo.getTitulo()}</h2>
                     <p class="card-text">${articulo.getResumen()}</p>
-                    <a href="/administrarArticulo/${articulo.getId()}" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="/administrarArticulo/${articulo.getId()}" class="btn btn-primary">Leer mas &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     ${articulo.getFecha()} <a href="#">${articulo.buscarNombreAutor(articulo.getAutor())}</a>
@@ -79,17 +79,19 @@
        <#if estaLogueado==false>
            <h1 class="my-4">&nbsp <small> </small></h1> <!-- ESPACIO VACIO -->
            <div class="card my-4">
-               <h5 class="card-header">Login</h5>
+               <h5 class="card-header">Log in!</h5>
                <div class="card-block">
                    <form action="/home" method="post" >
                        <div class="input-group">
-                           <input type="text" name="User" value="" id="Username" placeholder="Username"><br>
+                           <input class="form-username form-control" type="text" name="User" value="" id="Username"
+                                  placeholder="Username"><br>
                        </div>
                        <div class="input-group">
-                           <input type="text" name="Pass" value="" id="Password" placeholder="Password"><br>
+                           <input class="form-username form-control" type="password" name="Pass" value="" id="Password"
+                                  placeholder="Password"><br>
                        </div>
                        <div class="input-group">
-                           <button class="btn btn-secondary" type="submit">Ingresar</button>
+                           <button class="btn btn-primary" type="submit">Ingresar</button>
 
                        </div>
                    </form>
@@ -107,7 +109,7 @@
                    </div>
                    <div class="input-group">
                        <form method="get" action="/home/cerrarSesion">
-                           <button class="btn btn-secondary" type="submit">CERRA SESION</button>
+                           <button class="btn btn-primary" type="submit">CERRAR SESION</button>
                        </form>
                    </div>
                </div>

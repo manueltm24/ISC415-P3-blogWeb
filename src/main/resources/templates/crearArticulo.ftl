@@ -61,12 +61,20 @@
                         <form action="/crearArticulo/${usuario.getId()}" method="post">
                             <div class="form-group">
                                 <label for="Titulo">Titulo&nbsp&nbsp&nbsp</label>
-                                <input style="width:500px" type="text" name="Titu" id="Titulo"><br>
+                                <input class="form-username form-control" style="width:500px" type="text" name="Titu"
+                                       id="Titulo" placeholder="Titulo del blog"><br>
                             </div>
 
                             <div class="form-group">
-                                <label for="Cuerpo">Cuerpo</label>
-                                <input style="width:500px;height:250px" type="text" name="Cuer" id="Cuerpo"><br>
+                                <label for="Cuerpo">Cuerpo: </label>
+                                <input class="form-username form-control" style="width:500px;height:250px" type="text"
+                                       name="Cuer" id="Cuerpo" placeholder="Cuerpo del blog"><br>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Etiqueta">Etiquetas: </label>
+                                <input class="form-username form-control" style="..." type="text" name="Eti"
+                                       id="Etiqueta" placeholder="Etiquetas. Si es mas de una, separarlas por comas.">
                             </div>
 
                             <button class="btn btn-success" type="submit" >Guardar</button>
