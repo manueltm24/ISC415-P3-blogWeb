@@ -56,6 +56,12 @@ public class Main {
 
             Usuario.insertarUsuario(nuevoUsuario);
 
+            List<Articulo> nuevaLista = Articulo.listadoArticulos();
+            Collections.reverse(nuevaLista);
+            attributes.put("articulos",nuevaLista);
+            attributes.put("usuarioLogueado", usuarioLogueado);
+            attributes.put("estaLogueado", estaLogueado);
+
             response.redirect("/home");
 
 
