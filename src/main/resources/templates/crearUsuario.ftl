@@ -59,18 +59,23 @@
                     <h2 class="card-title">Nuevo Usuario</h2>
                     <form action="/crearUsuario/" method="post" >
                         <p class="card-text">
-                            <label for="Nombre">Nombre</label>
-                            <input type="text" name="Nom" id="Nombre"><br>
-                            <label for="Username">Username</label>
-                            <input type="text" name="User" id="Username"><br>
-                            <label for="Password">Password</label>
-                            <input type="text" name="Pass" id="Password"><br>
-                            <label for="Administrador">Administrador</label>
+                            <label for="Nombre">Nombre: </label>
+                            <input class="form-username form-control" type="text" name="Nom" id="Nombre"
+                                   placeholder="Nombre del usuario" required><br>
+                            <label for="Username">Username: </label>
+                            <input class="form-username form-control" type="text" name="User" id="Username"
+                                   placeholder="Nombre de usuario" required><br>
+                            <label for="Password">Password: </label>
+                            <input class="form-username form-control" type="password" name="Pass" id="Password"
+                                   placeholder="Contrasena del usuario" required><br>
+                            <label for="Administrador">Administrador: </label>
                             <input type="checkbox" name="Adm" value="true">
-                            <label for="Autor">Autor</label>
+                            <label for="Autor">Autor: </label>
                             <input type="checkbox" name="Aut" value="true">
                         </p>
-                            <button class="btn btn-secondary" type="submit">Guardar Usuario</button>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <button class="btn btn-danger" type="button" onclick="location.href = '/home';">Cancelar
+                        </button>
                     </form>
                 </div>
             </div>
@@ -96,5 +101,20 @@
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
-
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var elements = document.getElementsByTagName("INPUT");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].oninvalid = function (e) {
+                e.target.setCustomValidity("");
+                if (!e.target.validity.valid) {
+                    e.target.setCustomValidity("Campo no puede estar vacio.");
+                }
+            };
+            elements[i].oninput = function (e) {
+                e.target.setCustomValidity("");
+            };
+        }
+    })
+</script>
 </html>

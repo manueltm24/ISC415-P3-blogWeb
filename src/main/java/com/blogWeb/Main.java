@@ -4,12 +4,13 @@ import com.blogWeb.Clases.Articulo;
 import com.blogWeb.Clases.Comentario;
 import com.blogWeb.Clases.Usuario;
 import freemarker.template.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.sql.SQLException;
 import java.util.*;
-
 
 import static com.blogWeb.DataBase.BootstrapServices.crearTablas;
 import static com.blogWeb.DataBase.BootstrapServices.startDb;
@@ -19,21 +20,33 @@ import static spark.Spark.*;
  * Created by mt on 04/06/17.
  */
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     static boolean estaLogueado=estaLogueado(false);
     static Usuario usuarioLogueado = new Usuario();
 
     public static void main(String[] args) throws SQLException {
+        logger.info("Iniciando aplicacion");
 
-
+        logger.info("Creando el folder estatico");
         staticFileLocation("/public/");
+        logger.info("Comenzando la base de datos");
         startDb(); //ABRE EL PUERTO DE LA BASE DE DATOS
+        logger.info("Creando las tablas");
         crearTablas(); //CREA TODAS LAS TABLAS NECESARIAS
 
-        Configuration configuration = new Configuration();
+        logger.info("Crear el usuario admin por defecto");
+        crearUsuarioAdmin();
+
+        logger.info("Creando la configuracion del template de freemarker");
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
         configuration.setClassForTemplateLoading(Main.class, "/templates/");
         FreeMarkerEngine freeMarkerEngine= new FreeMarkerEngine(configuration);
 
+        get("", (request, response) -> {
+            response.redirect("/home");
+            return null;
+        });
 
         get("/crearUsuario/", (request,response)-> {
 
@@ -281,7 +294,7 @@ public class Main {
             int idArticulo = Integer.parseInt(request.params("idArticulo"));
             Map<String, Object> attributes = new HashMap<>();
 
-            Articulo.modificarArticlo(idArticulo,request.queryMap().value("Titu"),request.queryMap().value("Cuer"));
+            Articulo.modificarArticulo(idArticulo, request.queryMap().value("Titu"), request.queryMap().value("Cuer"));
 
             attributes.put("articulo",Articulo.listadoArticulosEspecifico(idArticulo));
             response.redirect("/home");
@@ -306,10 +319,25 @@ public class Main {
                 halt(401,"No tiene permisos para modificar articulo!");
             }
         } );
-
     }
     private static boolean estaLogueado(boolean estaLogueado){
         return estaLogueado;
+    }
+
+    private static void crearUsuarioAdmin() {
+        Usuario usuario = new Usuario();
+        usuario.setId(1);
+        usuario.setNombre("Gustavo");
+        usuario.setUsername("admin");
+        usuario.setPassword("admin");
+        usuario.setAdministrador(true);
+        usuario.setAutor(true);
+
+        logger.info("Verificando si el usuario ya se introdujo. El usuario por defecto");
+        Usuario.buscarListadoUsuarios().stream().forEach(usuario1 -> {
+            if (usuario1.getId() != usuario.getId())
+                Usuario.insertarUsuario(usuario);
+        });
     }
 }
 

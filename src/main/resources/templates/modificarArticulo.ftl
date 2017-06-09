@@ -66,8 +66,11 @@
 
                         <div class="form-group">
                             <label for="Cuerpo">Cuerpo</label>
-                            <input style="width:500px;height:250px" type="text" name="Cuer" id="Cuerpo" value="${articulo.getCuerpo()}"><br>
+                            <input class="form-username form-control" style="width:500px;height:250px" type="text"
+                                   name="Cuer" id="Cuerpo" value="${articulo.getCuerpo()}"><br>
                         </div>
+
+                        <!-- todo Aqui falta las etiquetas -->
 
                         <button class="btn btn-success" type="submit" >Guardar</button>
                     </form>

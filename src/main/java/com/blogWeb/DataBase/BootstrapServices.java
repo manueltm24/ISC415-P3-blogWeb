@@ -3,7 +3,9 @@ package com.blogWeb.DataBase;
 import com.blogWeb.Clases.Usuario;
 import org.h2.tools.Server;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by mt on 04/06/17.
@@ -30,6 +32,7 @@ public class BootstrapServices {
        crearTablaUsuario();
        crearTablaArticulo();
        crearTablaComentario();
+        crearTablaArticuloEtiquetas();
 
        Usuario usuarioAdmin = new Usuario();
        usuarioAdmin.setId(1);
@@ -50,7 +53,7 @@ public class BootstrapServices {
         String sql = "CREATE TABLE IF NOT EXISTS ETIQUETA\n" +
                 "(\n" +
                 "  id INTEGER PRIMARY KEY NOT NULL,\n" +
-                //FALTA ATRIVUTO ETIQUETA
+                "   etiqueta VARCHAR(255) \n" +
                 ");";
 
 
@@ -117,4 +120,21 @@ public class BootstrapServices {
         con.close();
     }
 
+
+    private static void crearTablaArticuloEtiquetas() throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS ARTICULO_ETIQUETAS\n" +
+                "(\n" +
+                "  id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,\n" +
+                "  articuloId INTEGER NOT NULL REFERENCES ARTICULO (id),\n" +
+                "  etiquetaId INTEGER NOT NULL REFERENCES ETIQUETA (id)\n" +
+                //FALTA EL ATRIVUTO ARTIULOOO Y USUARIO!!!!!!!
+                ");";
+
+
+        Connection con = ConexionDB.getInstancia().getConexion();
+        Statement statement = con.createStatement();
+        statement.execute(sql);
+        statement.close();
+        con.close();
+    }
 }
