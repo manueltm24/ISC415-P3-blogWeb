@@ -10,9 +10,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: sparkjava:spark-debug-tools:0.5" level="project" />
-    <orderEntry type="library" name="Gradle: com.sparkjava:spark-template-freemarker:2.3" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty.websocket:websocket-common:9.3.6.v20151106" level="project" />
-    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-simple:1.7.21" level="project" />
+    <orderEntry type="library" name="Gradle: org.eclipse.jetty.websocket:websocket-client:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-server:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-webapp:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty.websocket:websocket-server:9.3.6.v20151106" level="project" />
@@ -24,12 +23,13 @@
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-xml:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-servlet:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Gradle: com.sparkjava:spark-debug-tools:0.5" level="project" />
-    <orderEntry type="library" name="Gradle: org.eclipse.jetty.websocket:websocket-client:9.3.6.v20151106" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-simple:1.7.21" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty.websocket:websocket-api:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-util:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-security:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Gradle: com.h2database:h2:1.4.191" level="project" />
-    <orderEntry type="library" name="Gradle: com.sparkjava:spark-core:2.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.sparkjava:spark-template-freemarker:2.3" level="project" />
     <orderEntry type="library" name="Gradle: org.freemarker:freemarker:2.3.19" level="project" />
+    <orderEntry type="library" name="Gradle: com.sparkjava:spark-core:2.5" level="project" />
   </component>
 </module>

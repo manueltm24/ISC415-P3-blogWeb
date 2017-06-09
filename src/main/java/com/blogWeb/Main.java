@@ -1,8 +1,9 @@
 package com.blogWeb;
 
-import com.blogWeb.Clases.Articulo;
-import com.blogWeb.Clases.Comentario;
-import com.blogWeb.Clases.Usuario;
+import com.blogWeb.clases.Articulo;
+import com.blogWeb.clases.Comentario;
+import com.blogWeb.clases.Etiqueta;
+import com.blogWeb.clases.Usuario;
 import freemarker.template.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +13,8 @@ import spark.template.freemarker.FreeMarkerEngine;
 import java.sql.SQLException;
 import java.util.*;
 
-import static com.blogWeb.DataBase.BootstrapServices.crearTablas;
-import static com.blogWeb.DataBase.BootstrapServices.startDb;
+import static com.blogWeb.database.BootstrapServices.crearTablas;
+import static com.blogWeb.database.BootstrapServices.startDb;
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
@@ -189,6 +190,13 @@ public class Main {
             nuevoArticulo.setId(Articulo.ultimoIdArticulo() + 1);
             nuevoArticulo.setFecha(new Date().toString());
 
+            List<String> list = Arrays.asList(request.queryMap().get("Eti").value().split(","));
+
+            for (int i = 0; i < list.size(); i++) {
+                Etiqueta etiqueta = new Etiqueta(new Etiqueta().ultimoIdEtiqueta() + 1 + i, list.get(i));
+
+                nuevoArticulo.getListadoEtiquetas().add(etiqueta);
+            }
 
             int usuarioId=Integer.parseInt(request.params("idUsuario"));
             Usuario usuarioLogueado = new Usuario();
@@ -225,6 +233,8 @@ public class Main {
             }
 
             List<Comentario> listadoComentario = Comentario.buscarListadoComentariosArticulo(articuloSeleccionId);
+
+            String etiquetas = articuloSeleccionado.getEtiquetas();
             //System.out.println(listadoComentario.get(0).getId());
 
             Map<String, Object> attributes = new HashMap<>();
@@ -233,6 +243,7 @@ public class Main {
             attributes.put("usuarioLogueado", usuarioLogueado);
             attributes.put("articuloSeleccionado", articuloSeleccionado);
             attributes.put("listadoComentario", listadoComentario);
+            attributes.put("etiquetas", etiquetas);
             return new ModelAndView(attributes, "/administrarArticulo.ftl");
         }, freeMarkerEngine );
 

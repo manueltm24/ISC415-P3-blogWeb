@@ -1,6 +1,6 @@
-package com.blogWeb.Clases;
+package com.blogWeb.clases;
 
-import com.blogWeb.DataBase.ConexionDB;
+import com.blogWeb.database.ConexionDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,13 +24,11 @@ public class Articulo {
     private String fecha;
     private String resumen;
     private List<Comentario> listadoComentario;
+    private List<Etiqueta> listadoEtiquetas;
 
-    public List<Comentario> getListadoComentario() {
-        return listadoComentario;
-    }
-
-    public void setListadoComentario(List<Comentario> listadoComentario) {
-        this.listadoComentario = listadoComentario;
+    public Articulo() {
+        listadoComentario = new ArrayList<>();
+        listadoEtiquetas = new ArrayList<>();
     }
 
     //QUERYS
@@ -55,6 +53,8 @@ public class Articulo {
                 art.setCuerpo(rs.getString("cuerpo"));
                 art.setAutor(rs.getInt("autor"));
                 art.setFecha(rs.getString("fecha"));
+                art.setListadoComentario(Comentario.buscarListadoComentariosArticulo(art.getId()));
+                art.setListadoEtiquetas(Etiqueta.buscarListadoEtiquetasArticulo(art.getId()));
                 articulos.add(art);
 
             }
@@ -94,7 +94,7 @@ public class Articulo {
                 art.setAutor(rs.getInt("autor"));
                 art.setFecha(rs.getString("fecha"));
                 art.setListadoComentario(Comentario.buscarListadoComentariosArticulo(art.getId()));
-
+                art.setListadoEtiquetas(Etiqueta.buscarListadoEtiquetasArticulo(art.getId()));
 
             }
 
@@ -125,6 +125,8 @@ public class Articulo {
             prepareStatement.setString(3, nuevoArticulo.getCuerpo());
             prepareStatement.setInt(4, nuevoArticulo.getAutor());
             prepareStatement.setString(5,nuevoArticulo.getFecha());
+
+            insertarEtiqueta(nuevoArticulo);
             //
             prepareStatement.execute();
 
@@ -132,6 +134,44 @@ public class Articulo {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private static void insertarEtiqueta(Articulo nuevoArticulo) {
+        Connection con = null;
+        try {
+
+            String query = "INSERT INTO ETIQUETA(id,etiqueta) VALUES(?,?)";
+            con = ConexionDB.getInstancia().getConexion();
+            //
+            for (int i = 0; i < nuevoArticulo.getListadoEtiquetas().size(); i++) {
+                PreparedStatement prepareStatement = con.prepareStatement(query);
+                //Antes de ejecutar seteo los parametros.
+                prepareStatement.setInt(1, nuevoArticulo.getListadoEtiquetas().get(i).getId());
+                prepareStatement.setString(2, nuevoArticulo.getListadoEtiquetas().get(i).getEtiqueta());
+                //
+                prepareStatement.execute();
+            }
+
+            query = "INSERT INTO ARTICULO_ETIQUETAS (ARTICULOID, ETIQUETAID) VALUES (?,?)";
+
+            for (int i = 0; i < nuevoArticulo.getListadoEtiquetas().size(); i++) {
+                PreparedStatement prepareStatement = con.prepareStatement(query);
+                //Antes de ejecutar seteo los parametros.
+                prepareStatement.setInt(1, nuevoArticulo.getId());
+                prepareStatement.setInt(2, nuevoArticulo.getListadoEtiquetas().get(i).getId());
+                //
+                prepareStatement.execute();
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
             try {
                 con.close();
             } catch (SQLException ex) {
@@ -227,6 +267,33 @@ public class Articulo {
             }
         }
         return ultimoIndice;
+    }
+
+    public List<Comentario> getListadoComentario() {
+        return listadoComentario;
+    }
+
+    public void setListadoComentario(List<Comentario> listadoComentario) {
+        this.listadoComentario = listadoComentario;
+    }
+
+    public List<Etiqueta> getListadoEtiquetas() {
+        return listadoEtiquetas;
+    }
+
+    public void setListadoEtiquetas(List<Etiqueta> listadoEtiquetas) {
+        this.listadoEtiquetas = listadoEtiquetas;
+    }
+
+    public String getEtiquetas() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Etiqueta etiqueta : listadoEtiquetas) {
+            stringBuilder.append(etiqueta.getEtiqueta() + ",");
+        }
+
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+
+        return stringBuilder.toString();
     }
 
     public String getFecha() {

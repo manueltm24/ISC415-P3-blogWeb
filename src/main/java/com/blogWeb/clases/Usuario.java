@@ -1,6 +1,6 @@
-package com.blogWeb.Clases;
+package com.blogWeb.clases;
 
-import com.blogWeb.DataBase.ConexionDB;
+import com.blogWeb.database.ConexionDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,57 +20,6 @@ public class Usuario {
     private String password;
     private boolean administrador;
     private boolean autor;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
-    }
-
-    public boolean isAutor() {
-        return autor;
-    }
-
-    public void setAutor(boolean autor) {
-        this.autor = autor;
-    }
-
-    //QUERYS
 
     public static void insertarUsuario(Usuario est){
 
@@ -101,7 +50,6 @@ public class Usuario {
             }
         }
     }
-
 
     public static List<Usuario> buscarListadoUsuarios(){
         ArrayList<Usuario> listadoUsuario = new ArrayList<Usuario>();
@@ -169,6 +117,56 @@ public class Usuario {
             }
         }
         return ultimoIndice;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    //QUERYS
+
+    public boolean isAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
+    }
+
+    public boolean isAutor() {
+        return autor;
+    }
+
+    public void setAutor(boolean autor) {
+        this.autor = autor;
     }
 
 

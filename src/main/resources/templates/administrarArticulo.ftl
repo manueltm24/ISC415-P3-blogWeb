@@ -56,6 +56,9 @@
                     <p class="card-text">${articuloSeleccionado.getCuerpo()}</p>
                 </div>
                 <div class="card-footer text-muted">
+                    <label>Etiquetas: ${etiquetas}</label>
+                </div>
+                <div class="card-footer text-muted">
 
                     <button type="button" class="btn btn-default">
                         <a href="/eliminarArticulo/${articuloSeleccionado.getId()}">Eliminar</a>

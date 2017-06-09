@@ -1,6 +1,6 @@
-package com.blogWeb.DataBase;
+package com.blogWeb.database;
 
-import com.blogWeb.Clases.Usuario;
+import com.blogWeb.clases.Usuario;
 import org.h2.tools.Server;
 
 import java.sql.Connection;
@@ -143,12 +143,12 @@ public class BootstrapServices {
 
 
     private static void crearTablaArticuloEtiquetas() throws SQLException {
+        //language=H2
         String sql = "CREATE TABLE IF NOT EXISTS ARTICULO_ETIQUETAS\n" +
                 "(\n" +
-                "  id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,\n" +
-                "  articuloId INTEGER NOT NULL REFERENCES ARTICULO (id),\n" +
-                "  etiquetaId INTEGER NOT NULL REFERENCES ETIQUETA (id)\n" +
-                //FALTA EL ATRIVUTO ARTIULOOO Y USUARIO!!!!!!!
+                "  articuloId INTEGER,\n" +
+                "  etiquetaId INTEGER,\n" +
+                "  PRIMARY KEY (articuloId, etiquetaId)\n" +
                 ");";
 
 

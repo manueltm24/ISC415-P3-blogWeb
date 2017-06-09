@@ -1,8 +1,11 @@
-package com.blogWeb.Clases;
+package com.blogWeb.clases;
 
-import com.blogWeb.DataBase.ConexionDB;
+import com.blogWeb.database.ConexionDB;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,42 +18,6 @@ public class Comentario {
     private String comentario;
     private int autorId;
     private int articuloId;
-
-
-    public int getAutorId() {
-        return autorId;
-    }
-
-    public void setAutorId(int autorId) {
-        this.autorId = autorId;
-    }
-
-    public int getArticuloId() {
-        return articuloId;
-    }
-
-    public void setArticuloId(int articuloId) {
-        this.articuloId = articuloId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-
-    ///QUERYS y FUNCIONES
 
     public static int ultimoIdComentario(){
         int ultimoIndice=0;
@@ -105,7 +72,6 @@ public class Comentario {
 
     }
 
-
     public static void eliminarComentario(int idComentario){
 
         Connection con = null;
@@ -130,8 +96,6 @@ public class Comentario {
         }
 
     }
-
-
 
     public static List<Comentario> buscarListadoComentariosArticulo(int id){
         ArrayList<Comentario> listadoComentarios = new ArrayList<Comentario>();
@@ -196,6 +160,41 @@ public class Comentario {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public int getAutorId() {
+        return autorId;
+    }
+
+    public void setAutorId(int autorId) {
+        this.autorId = autorId;
+    }
+
+    public int getArticuloId() {
+        return articuloId;
+    }
+
+
+    ///QUERYS y FUNCIONES
+
+    public void setArticuloId(int articuloId) {
+        this.articuloId = articuloId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
 }

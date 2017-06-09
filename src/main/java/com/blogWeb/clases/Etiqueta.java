@@ -1,6 +1,6 @@
-package com.blogWeb.Clases;
+package com.blogWeb.clases;
 
-import com.blogWeb.DataBase.ConexionDB;
+import com.blogWeb.database.ConexionDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +15,14 @@ import java.util.List;
 public class Etiqueta {
     private int id;
     private String etiqueta;
+
+    public Etiqueta() {
+    }
+
+    public Etiqueta(int id, String etiqueta) {
+        this.id = id;
+        this.etiqueta = etiqueta;
+    }
 
     public static List<Etiqueta> listadoEtiquetas() {
         ArrayList<Etiqueta> articulos = new ArrayList<Etiqueta>();
@@ -53,7 +61,7 @@ public class Etiqueta {
         Connection con = null;
         try {
 
-            String query = "INSERT INTO ETIQUETA(id, etiqueta) VALUES(?,?)";
+            String query = "INSERT INTO ETIQUETA(id,etiqueta) VALUES(?,?)";
             con = ConexionDB.getInstancia().getConexion();
             //
             PreparedStatement prepareStatement = con.prepareStatement(query);
@@ -62,8 +70,6 @@ public class Etiqueta {
             prepareStatement.setString(2, etiqueta.getEtiqueta());
             //
             prepareStatement.execute();
-
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -126,9 +132,104 @@ public class Etiqueta {
         }
     }
 
+    public static List<Etiqueta> buscarListadoEtiquetasArticulo(int id) {
+        ArrayList<Etiqueta> listadoEtiquetas = new ArrayList<Etiqueta>();
+
+        Etiqueta nuevaEtiqueta;
+        Connection con = null;
+        try {
+
+            String query = "SELECT * FROM ETIQUETA E, ARTICULO_ETIQUETAS AE WHERE E.ID = AE.ETIQUETAID AND AE.ARTICULOID =" + id;
+            con = ConexionDB.getInstancia().getConexion();
+            //
+            PreparedStatement prepareStatement = con.prepareStatement(query);
+            //Ejecuto...
+            ResultSet rs = prepareStatement.executeQuery();
+            while (rs.next()) {
+                nuevaEtiqueta = new Etiqueta();
+                nuevaEtiqueta.setEtiqueta(rs.getString("etiqueta"));
+                listadoEtiquetas.add(nuevaEtiqueta);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return listadoEtiquetas;
+
+    }
+
+    public static List<Etiqueta> buscarListadoEtiquetas() {
+        ArrayList<Etiqueta> listadoEtiquetas = new ArrayList<Etiqueta>();
+
+        Etiqueta nuevoEtiqueta;
+        Connection con = null;
+        try {
+
+            String query = "SELECT * FROM ETIQUETA";
+            con = ConexionDB.getInstancia().getConexion();
+            //
+            PreparedStatement prepareStatement = con.prepareStatement(query);
+            //Ejecuto...
+            ResultSet rs = prepareStatement.executeQuery();
+            while (rs.next()) {
+                nuevoEtiqueta = new Etiqueta();
+                nuevoEtiqueta.setId(rs.getInt("id"));
+                nuevoEtiqueta.setEtiqueta(rs.getString("etiqueta"));
+                listadoEtiquetas.add(nuevoEtiqueta);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return listadoEtiquetas;
+
+    }
+
+    public int ultimoIdEtiqueta() {
+        int ultimoIndice = 0;
+
+        Connection con = null;
+        try {
+
+            String query = "SELECT id FROM ETIQUETA ORDER BY ID DESC LIMIT 1";
+            con = ConexionDB.getInstancia().getConexion();
+            //
+            PreparedStatement prepareStatement = con.prepareStatement(query);
+            //Ejecuto...
+            ResultSet rs = prepareStatement.executeQuery();
+
+            while (rs.next()) {
+                ultimoIndice = rs.getInt("id");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return ultimoIndice;
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //QUERYS
+
 
     public int getId() {
         return id;
