@@ -36,7 +36,7 @@ public class Main {
         crearTablas(); //CREA TODAS LAS TABLAS NECESARIAS
 
         logger.info("Crear el usuario admin por defecto");
-        crearUsuarioAdmin();
+        //crearUsuarioAdmin();
 
         logger.info("Creando la configuracion del template de freemarker");
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
@@ -324,6 +324,7 @@ public class Main {
         return estaLogueado;
     }
 
+    /*
     private static void crearUsuarioAdmin() {
         Usuario usuario = new Usuario();
         usuario.setId(1);
@@ -338,6 +339,6 @@ public class Main {
             if (usuario1.getId() != usuario.getId())
                 Usuario.insertarUsuario(usuario);
         });
-    }
+    }*/
 }
 
