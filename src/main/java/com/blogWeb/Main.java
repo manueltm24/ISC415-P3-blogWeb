@@ -99,7 +99,7 @@ public class Main {
                         usuarioLogueado = listadoUsuarioBD.get(i);
                     }
 
-                    //FALTA CREAR CONDICION SINO EXISTE****************************************************************
+                    //FALTA CREAR CONDICION SINO EXISTE*************************************
 
                 }
             }
