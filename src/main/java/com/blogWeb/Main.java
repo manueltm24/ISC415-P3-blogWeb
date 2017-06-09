@@ -33,7 +33,7 @@ public class Main {
         logger.info("Comenzando la base de datos");
         startDb(); //ABRE EL PUERTO DE LA BASE DE DATOS
         logger.info("Creando las tablas");
-        crearTablas(); //CREA TODAS LAS TABLAS NECESARIAS
+        crearTablas(); //CREA TODAS LAS TABLAS NECESARIASs
 
         logger.info("Crear el usuario admin por defecto");
         //crearUsuarioAdmin();
