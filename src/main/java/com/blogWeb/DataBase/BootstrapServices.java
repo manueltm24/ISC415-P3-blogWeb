@@ -42,7 +42,10 @@ public class BootstrapServices {
        usuarioAdmin.setAdministrador(true);
        usuarioAdmin.setAutor(true);
 
-//       Usuario.insertarUsuario(usuarioAdmin);
+       if(!(Usuario.existeAdmin())){
+           Usuario.insertarUsuario(usuarioAdmin);
+       }
+
 
 
     }

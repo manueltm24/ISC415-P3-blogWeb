@@ -141,6 +141,19 @@ public class Usuario {
 
     }
 
+    public static boolean existeAdmin(){
+        List<Usuario> listadoUsuario = new ArrayList<Usuario>();
+        listadoUsuario=buscarListadoUsuarios();
+
+        for(int i=0;i<listadoUsuario.size();i++){
+            if(listadoUsuario.get(i).getUsername().equals("admin")){
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public static int ultimoIdUsuario(){
         int ultimoIndice=0;
         List<Usuario> listadoUsuarios = buscarListadoUsuarios();
