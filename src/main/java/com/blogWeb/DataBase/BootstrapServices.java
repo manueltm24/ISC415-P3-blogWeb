@@ -32,7 +32,8 @@ public class BootstrapServices {
        crearTablaUsuario();
        crearTablaArticulo();
        crearTablaComentario();
-        crearTablaArticuloEtiquetas();
+       crearTablaArticuloEtiquetas();
+       //crearTablaArticuloComentario();
 
        Usuario usuarioAdmin = new Usuario();
        usuarioAdmin.setId(1);
@@ -67,7 +68,7 @@ public class BootstrapServices {
         con.close();
     }
 
-    private static void crearTablaUsuario() throws  SQLException{
+    private static void crearTablaUsuario() throws  SQLException{ //BIEN!
         String sql = "CREATE TABLE IF NOT EXISTS USUARIO\n" +
                 "(\n" +
                 "  id INTEGER PRIMARY KEY NOT NULL,\n" +
@@ -92,9 +93,8 @@ public class BootstrapServices {
                 "  id INTEGER PRIMARY KEY NOT NULL,\n" +
                 "  titulo VARCHAR(100) NOT NULL,\n" +
                 "  cuerpo VARCHAR(1000) NOT NULL,\n" +
-                "  autor INTEGER NOT NULL,\n" +
+                "  autor INTEGER NOT NULL REFERENCES USUARIO (id) ON UPDATE CASCADE ,\n" +
                 "  fecha VARCHAR(50) NOT NULL ,\n" +
-                //FALTA ANADIR LISTA DE COMENTARIOS Y LISTA DE ETIQUETAS
                 ");";
 
 
@@ -110,8 +110,8 @@ public class BootstrapServices {
                 "(\n" +
                 "  id INTEGER PRIMARY KEY NOT NULL,\n" +
                 "  comentario VARCHAR(500) NOT NULL,\n" +
-                "  autorId INTEGER NOT NULL,\n" +
-                "  articuloId INTEGER NOT NULL,\n" +
+                "  autorId INTEGER NOT NULL REFERENCES USUARIO(id) ON UPDATE CASCADE ,\n" +
+                "  articuloId INTEGER NOT NULL REFERENCES ARTICULO(id) ON UPDATE CASCADE ,\n" +
                 //FALTA EL ATRIVUTO ARTIULOOO Y USUARIO!!!!!!!
                 ");";
 
@@ -122,6 +122,24 @@ public class BootstrapServices {
         statement.close();
         con.close();
     }
+    /*
+    private static void crearTablaArticuloComentario() throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS ARTICULO_COMENTARIO\n" +
+                "(\n" +
+                "  id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,\n" +
+                "  articuloId INTEGER NOT NULL REFERENCES ARTICULO (id),\n" +
+                "  etiquetaId INTEGER NOT NULL REFERENCES COMENTARIO (id)\n" +
+                //FALTA EL ATRIVUTO ARTIULOOO Y USUARIO!!!!!!!
+                ");";
+
+
+        Connection con = ConexionDB.getInstancia().getConexion();
+        Statement statement = con.createStatement();
+        statement.execute(sql);
+        statement.close();
+        con.close();
+    }
+    */
 
 
     private static void crearTablaArticuloEtiquetas() throws SQLException {

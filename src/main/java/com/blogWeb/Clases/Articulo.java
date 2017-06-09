@@ -23,8 +23,17 @@ public class Articulo {
     private int autor;
     private String fecha;
     private String resumen;
+    private List<Comentario> listadoComentario;
 
-//QUERYS
+    public List<Comentario> getListadoComentario() {
+        return listadoComentario;
+    }
+
+    public void setListadoComentario(List<Comentario> listadoComentario) {
+        this.listadoComentario = listadoComentario;
+    }
+
+    //QUERYS
     public static List<Articulo> listadoArticulos(){
         ArrayList<Articulo> articulos = new ArrayList<Articulo>();
 
@@ -84,6 +93,7 @@ public class Articulo {
                 art.setCuerpo(rs.getString("cuerpo"));
                 art.setAutor(rs.getInt("autor"));
                 art.setFecha(rs.getString("fecha"));
+                art.setListadoComentario(Comentario.buscarListadoComentariosArticulo(art.getId()));
 
 
             }

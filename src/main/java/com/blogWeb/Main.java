@@ -15,6 +15,7 @@ import java.util.*;
 import static com.blogWeb.DataBase.BootstrapServices.crearTablas;
 import static com.blogWeb.DataBase.BootstrapServices.startDb;
 import static spark.Spark.*;
+import static spark.debug.DebugScreen.enableDebugScreen;
 
 /**
  * Created by mt on 04/06/17.
@@ -26,6 +27,8 @@ public class Main {
     static Usuario usuarioLogueado = new Usuario();
 
     public static void main(String[] args) throws SQLException {
+
+        enableDebugScreen();
         logger.info("Iniciando aplicacion");
 
         logger.info("Creando el folder estatico");
@@ -212,6 +215,7 @@ public class Main {
             Articulo articuloSeleccionado = new Articulo();
 
 
+
             //BUSCO EL ARTICULO QUE SELECCIONE
             for(int i=0;i<Articulo.listadoArticulos().size();i++){
                 if(articuloSeleccionId == Articulo.listadoArticulos().get(i).getId()){
@@ -220,13 +224,15 @@ public class Main {
                 }
             }
 
+            List<Comentario> listadoComentario = Comentario.buscarListadoComentariosArticulo(articuloSeleccionId);
+            //System.out.println(listadoComentario.get(0).getId());
+
             Map<String, Object> attributes = new HashMap<>();
 
             attributes.put("estaLogueado", estaLogueado);
             attributes.put("usuarioLogueado", usuarioLogueado);
             attributes.put("articuloSeleccionado", articuloSeleccionado);
-            attributes.put("comentarios", Comentario.buscarListadoComentariosArticulo(articuloSeleccionId));
-
+            attributes.put("listadoComentario", listadoComentario);
             return new ModelAndView(attributes, "/administrarArticulo.ftl");
         }, freeMarkerEngine );
 

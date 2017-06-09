@@ -72,22 +72,29 @@
                 <div class="card-block">
                     <h2 class="card-title">Comentarios</h2>
                     <p class="card-text">
-                    <#list comentarios as comentario>
+
+
+                    <#list listadoComentario as comentario>
                         <div class="card mb-4">
                             <div class="card-block">
                                 <p class="card-text">${comentario.getComentario()}</p>
                             </div>
                         <!--LOGICA DE ELIMINAR-->
+                        <!--
                         <div class="card-footer text-muted">Comentario hecho por: <a
-                                href="#">${comentario.getAutorId()}</a>
+                                href="#">${articuloSeleccionado.buscarNombreAutor(usuarioLogueado.getId())}</a>
                                 <!--
                                 <button type="button" class="btn btn-default">
-                                    <a href="/eliminarComentario/${articuloSeleccionado.getAutor()}/${comentario.getId()}">Eliminar</a>
+                                    <a href="/eliminarComentario/${articuloSeleccionado.buscarNombreAutor(articuloSeleccionado.getAutor())}/${comentario.getId()}">Eliminar</a>
                                 </button>
                                 -->
+
                             </div>
+
             </div>
                         </#list>
+
+
 
                     </p>
         </div>

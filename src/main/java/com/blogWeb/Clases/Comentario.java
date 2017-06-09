@@ -16,6 +16,7 @@ public class Comentario {
     private int autorId;
     private int articuloId;
 
+
     public int getAutorId() {
         return autorId;
     }
