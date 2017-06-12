@@ -70,8 +70,10 @@
                                    placeholder="Contrasena del usuario" required><br>
                             <label for="Administrador">Administrador: </label>
                             <input type="checkbox" name="Adm" value="true">
+                            <input type="hidden" name="Adm" value="false">
                             <label for="Autor">Autor: </label>
                             <input type="checkbox" name="Aut" value="true">
+                            <input type="hidden" name="Aut" value="false">
                         </p>
                         <button class="btn btn-primary" type="submit">Guardar</button>
                         <button class="btn btn-danger" type="button" onclick="location.href = '/home';">Cancelar
